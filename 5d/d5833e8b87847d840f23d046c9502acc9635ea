@@ -1,0 +1,27 @@
+.gitignore
+  s_8ac33c98a97b8d::t_2a375ea1b80299 1-11
+README.md
+  s_8ac33c98a97b8d::t_f16d915f76a5d9 1-23
+content.js
+  s_8ac33c98a97b8d::t_90b8d3dcb29d91 1-133
+manifest.json
+  s_8ac33c98a97b8d::t_fc7161ec10b09d 1-17
+styles.css
+  s_8ac33c98a97b8d::t_81890739358a6a 1-134
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "5dd5833e8b87847d840f23d046c9502acc9635ea",
+  "prompts": {},
+  "sessions": {
+    "s_8ac33c98a97b8d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "241f9d8a-6d97-45c0-80bf-c9b3d9030f14",
+        "model": "claude-opus-5"
+      },
+      "human_author": "meher <20615903+meherhendi@users.noreply.github.com>"
+    }
+  }
+}
