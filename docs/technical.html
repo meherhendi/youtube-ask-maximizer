@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Technical details — Maximize "Ask about this video"</title>
+<meta name="description" content="How the Maximize &quot;Ask about this video&quot; Chrome extension works: Manifest V3 with zero permissions, shadow-DOM traversal of YouTube's engagement panel, CSS overlay, browser compatibility and known limitations.">
+<link rel="canonical" href="https://meherhendi.github.io/youtube-ask-maximizer/technical.html">
+<link rel="icon" href="icon128.png" type="image/png">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://meherhendi.github.io/youtube-ask-maximizer/technical.html">
+<meta property="og:title" content="Technical details — Maximize &quot;Ask about this video&quot;">
+<meta property="og:description" content="Manifest V3, zero permissions, shadow-DOM traversal of YouTube's engagement panel. How it works and what can break.">
+<meta property="og:image" content="https://meherhendi.github.io/youtube-ask-maximizer/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://meherhendi.github.io/youtube-ask-maximizer/og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://meherhendi.github.io/youtube-ask-maximizer/technical.html#faq",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I make YouTube's \"Ask about this video\" panel wider?",
+      "acceptedAnswer": { "@type": "Answer", "text": "YouTube fixes the \"Ask about this video\" panel at roughly 456px and offers no setting to widen it. The Maximize \"Ask about this video\" extension injects a maximize button into the panel header; clicking it expands the panel to the full width of the browser window." }
+    },
+    {
+      "@type": "Question",
+      "name": "What permissions does the Maximize \"Ask about this video\" extension require?",
+      "acceptedAnswer": { "@type": "Answer", "text": "None. The Manifest V3 manifest declares no permissions array and no host_permissions array. The extension is one content script plus one stylesheet scoped to www.youtube.com and m.youtube.com. It makes no network requests, stores no data and contains no tracking code." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the extension work in Brave, Edge and other Chromium browsers?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. It is a standard Manifest V3 extension using no Chrome-specific APIs, so it runs in Brave, Microsoft Edge, Opera and Vivaldi. Chrome and Brave have been tested directly. Firefox is not supported." }
+    },
+    {
+      "@type": "Question",
+      "name": "Will the extension break when YouTube changes its layout?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It can. The extension targets YouTube's ytd-engagement-panel-section-list-renderer element and the PAyouchat target-id, which YouTube revises periodically. It includes fallback placement for unfamiliar header structures, but a large layout change can still require an update." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="shell">
+
+  <header class="masthead">
+    <a class="wordmark" href="./">Maximize <em>Ask about this video</em></a>
+    <nav>
+      <a href="technical.html" aria-current="page">Technical details</a>
+      <a href="https://github.com/meherhendi/youtube-ask-maximizer">GitHub</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>Technical details</h1>
+    <p class="deck">Manifest V3, two source files, no permissions. Everything it does happens in the page.</p>
+  </div>
+
+  <div class="row">
+    <div class="label">At a glance</div>
+    <div>
+      <dl class="facts">
+        <div><dt>Version</dt><dd>1.0.0</dd></div>
+        <div><dt>Manifest</dt><dd>V3</dd></div>
+        <div><dt>Permissions</dt><dd>None &mdash; no <code>permissions</code>, no <code>host_permissions</code></dd></div>
+        <div><dt>Match patterns</dt><dd><code>https://www.youtube.com/*</code>, <code>https://m.youtube.com/*</code></dd></div>
+        <div><dt>Injection</dt><dd><code>run_at: document_idle</code></dd></div>
+        <div><dt>Package size</dt><dd>~11&nbsp;KB, 8 files</dd></div>
+        <div><dt>Network calls</dt><dd>None</dd></div>
+        <div><dt>Storage</dt><dd>None &mdash; state is in-memory only</dd></div>
+        <div><dt>Licence</dt><dd><a href="https://github.com/meherhendi/youtube-ask-maximizer/blob/main/LICENSE">MIT</a></dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">How it works</div>
+    <div>
+      <h3>Finding the panel</h3>
+      <p>YouTube renders its side panels as <code>ytd-engagement-panel-section-list-renderer</code> elements. The Ask panel is identified by <code>target-id="PAyouchat"</code>. YouTube mixes light DOM with open shadow roots, so the lookup recurses through both.</p>
+      <pre><code>function deepQueryAll(selector, root, out) {
+  root.querySelectorAll(selector).forEach(el =&gt; out.push(el));
+  root.querySelectorAll('*').forEach(el =&gt; {
+    if (el.shadowRoot) deepQueryAll(selector, el.shadowRoot, out);
+  });
+  return out;
+}</code></pre>
+
+      <h3>Placing the button</h3>
+      <p>The button is inserted immediately before <code>#visibility-button</code> (YouTube's close control) inside <code>ytd-engagement-panel-title-header-renderer</code>. If that structure isn't found, it falls back to the header container, then to absolute positioning over the panel.</p>
+
+      <h3>Staying attached</h3>
+      <p>YouTube is a single-page app that tears the panel down on navigation. A <code>MutationObserver</code> throttled through <code>requestAnimationFrame</code> re-injects the button, with a <code>setInterval</code> backstop. <code>yt-navigate-finish</code> resets the panel to its normal width.</p>
+
+      <h3>Maximizing</h3>
+      <p>Toggling adds <code>.ytmax-panel--max</code>, which switches the panel to <code>position: fixed</code> across the viewport. Its top edge is computed from the masthead's height and written to a <code>--ytmax-top</code> custom property, so the panel sits under the header rather than beneath it.</p>
+      <pre><code>--ytmax-font: 18px;   /* YouTube's default is 14px */
+line-height: 1.65;    /* headings scale to 1.25x */</code></pre>
+      <p>Icons are pinned back to <code>font-size: initial</code> so they don't grow with the text.</p>
+
+      <h3>Theming</h3>
+      <p>YouTube's newer <code>color-version</code> theming resolves <code>--yt-spec-text-primary</code> to an empty string, so the button colour keys off the <code>dark</code> and <code>darker-dark-theme</code> attributes instead &mdash; the same signal the native close button follows. Verified: the button computes to <code>rgb(241, 241, 241)</code> in dark mode, matching close exactly.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">Files</div>
+    <div>
+      <pre><code>manifest.json   MV3 manifest, content script scoped to youtube.com
+content.js      panel lookup, button injection, toggle state  (~4 KB)
+styles.css      maximized layout and text scaling             (~3.5 KB)
+icons/          16, 32, 48, 128 px</code></pre>
+      <p class="fine">Roughly 200 lines total. Small enough to read before you install it.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">Privacy</div>
+    <div>
+      <p>The extension requests no permissions, so there is no capability to misuse.</p>
+      <ul class="plain">
+        <li>No network requests of any kind.</li>
+        <li>No <code>storage</code> permission; nothing is persisted.</li>
+        <li>No analytics, telemetry or tracking.</li>
+        <li>No remote code &mdash; everything ships in the package.</li>
+        <li>Cannot read any site other than YouTube, nor history or cookies.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">Compatibility</div>
+    <div>
+      <dl class="facts">
+        <div><dt>Chrome</dt><dd>Tested</dd></div>
+        <div><dt>Brave</dt><dd>Tested</dd></div>
+        <div><dt>Edge, Opera, Vivaldi</dt><dd>Expected to work &mdash; Chromium, MV3, no Chrome-only APIs</dd></div>
+        <div><dt>Firefox</dt><dd>Not supported</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">Limitations</div>
+    <div>
+      <ul class="plain">
+        <li>Targets YouTube's internal DOM, which YouTube changes without notice. A layout revision can break the button until the selectors are updated.</li>
+        <li>Desktop YouTube only; the mobile match pattern is included but untested.</li>
+        <li>The maximized state is deliberately not persisted &mdash; every page load starts normal.</li>
+        <li>Installed unpacked, so Chrome shows a developer-mode notice on each launch until it's on the Web Store.</li>
+      </ul>
+      <p><a href="https://github.com/meherhendi/youtube-ask-maximizer/issues">Report a problem &rarr;</a></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">Build</div>
+    <div>
+      <p>There is no build step. To produce a Web Store package:</p>
+      <pre><code>zip -r youtube-ask-maximizer.zip \
+    manifest.json content.js styles.css icons/</code></pre>
+    </div>
+  </div>
+
+  <footer>
+    <p class="fine">MIT licensed. Built by <a href="https://github.com/meherhendi">Meher Hendi</a>. Independent project &mdash; not affiliated with or endorsed by YouTube or Google LLC.</p>
+  </footer>
+
+</div>
+</body>
+</html>

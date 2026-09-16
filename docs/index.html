@@ -3,330 +3,127 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Maximize "Ask about this video" — Chrome extension for YouTube's AI panel</title>
-<meta name="description" content="Free open-source Chrome extension that expands YouTube's &quot;Ask about this video&quot; AI panel to the full width of the browser window and enlarges its text to 18px. No permissions, no tracking, MIT licensed.">
+<title>Maximize "Ask about this video" — full-width YouTube AI panel</title>
+<meta name="description" content="A free Chrome extension that makes YouTube's narrow &quot;Ask about this video&quot; AI panel fill the whole browser window, with bigger text. No permissions, no tracking.">
 <link rel="canonical" href="https://meherhendi.github.io/youtube-ask-maximizer/">
 <link rel="icon" href="icon128.png" type="image/png">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://meherhendi.github.io/youtube-ask-maximizer/">
-<meta property="og:title" content="Maximize &quot;Ask about this video&quot; — Chrome extension for YouTube's AI panel">
-<meta property="og:description" content="Expand YouTube's &quot;Ask about this video&quot; AI panel to the full browser width, with larger text. Open source, zero permissions.">
+<meta property="og:title" content="Maximize &quot;Ask about this video&quot;">
+<meta property="og:description" content="Make YouTube's narrow AI panel fill the whole window, with bigger text. Free and open source.">
 <meta property="og:image" content="https://meherhendi.github.io/youtube-ask-maximizer/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Maximize &quot;Ask about this video&quot; — Chrome extension for YouTube's AI panel">
-<meta name="twitter:description" content="Expand YouTube's &quot;Ask about this video&quot; AI panel to the full browser width, with larger text. Open source, zero permissions.">
+<meta name="twitter:title" content="Maximize &quot;Ask about this video&quot;">
+<meta name="twitter:description" content="Make YouTube's narrow AI panel fill the whole window, with bigger text. Free and open source.">
 <meta name="twitter:image" content="https://meherhendi.github.io/youtube-ask-maximizer/og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://meherhendi.github.io/youtube-ask-maximizer/#software",
-      "name": "Maximize \"Ask about this video\"",
-      "alternateName": "youtube-ask-maximizer",
-      "applicationCategory": "BrowserApplication",
-      "applicationSubCategory": "Browser Extension",
-      "operatingSystem": "Chrome, Brave, Edge, Opera, Vivaldi (Chromium 88+)",
-      "browserRequirements": "Requires a Chromium-based browser supporting Manifest V3",
-      "softwareVersion": "1.0.0",
-      "description": "A Chrome extension that adds a maximize button to YouTube's \"Ask about this video\" AI panel, expanding it to the full width of the browser window and increasing its body text from 14px to 18px.",
-      "license": "https://opensource.org/licenses/MIT",
-      "isAccessibleForFree": true,
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "permissions": "none",
-      "codeRepository": "https://github.com/meherhendi/youtube-ask-maximizer",
-      "author": { "@type": "Person", "name": "Meher Hendi", "url": "https://github.com/meherhendi" },
-      "featureList": [
-        "Expands the YouTube Ask about this video panel to full browser window width",
-        "Increases panel body text from 14px to 18px while maximized",
-        "One-click toggle button placed next to the panel's Close button",
-        "Escape key restores the original panel width",
-        "Requests zero browser permissions"
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://meherhendi.github.io/youtube-ask-maximizer/#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How do I make YouTube's \"Ask about this video\" panel wider?",
-          "acceptedAnswer": { "@type": "Answer", "text": "YouTube gives the \"Ask about this video\" panel a fixed width of about 456px and provides no built-in way to widen it. The Maximize \"Ask about this video\" extension adds a maximize button to the panel's header; clicking it expands the panel to the full width of the browser window." }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I make the text in YouTube's AI panel bigger?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Maximize \"Ask about this video\" extension increases the panel's body text from YouTube's default 14px to 18px whenever the panel is maximized, and restores 14px when you collapse it back." }
-        },
-        {
-          "@type": "Question",
-          "name": "What permissions does the Maximize \"Ask about this video\" extension require?",
-          "acceptedAnswer": { "@type": "Answer", "text": "None. The extension declares no permissions and no host permissions in its Manifest V3 manifest. It is a content script scoped to www.youtube.com and m.youtube.com that adds a button and CSS. It makes no network requests, stores no data, and includes no analytics or tracking." }
-        },
-        {
-          "@type": "Question",
-          "name": "Does this extension work in Brave, Edge, and other Chromium browsers?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. It is a standard Manifest V3 extension with no Chrome-specific APIs, so it runs in any Chromium-based browser including Brave, Microsoft Edge, Opera, and Vivaldi. It has been tested in Google Chrome and Brave." }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I install the Maximize \"Ask about this video\" extension?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Download or clone the repository from github.com/meherhendi/youtube-ask-maximizer, open chrome://extensions, enable Developer mode, click Load unpacked, and select the extension folder. Then reload any open YouTube tab." }
-        },
-        {
-          "@type": "Question",
-          "name": "Is the extension free and open source?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Maximize \"Ask about this video\" is free and released under the MIT License. The complete source is roughly 200 lines of JavaScript and CSS, published at github.com/meherhendi/youtube-ask-maximizer." }
-        }
-      ]
-    }
+  "@type": "SoftwareApplication",
+  "@id": "https://meherhendi.github.io/youtube-ask-maximizer/#software",
+  "name": "Maximize \"Ask about this video\"",
+  "alternateName": "youtube-ask-maximizer",
+  "applicationCategory": "BrowserApplication",
+  "applicationSubCategory": "Browser Extension",
+  "operatingSystem": "Chrome, Brave, Edge, Opera, Vivaldi (Chromium, Manifest V3)",
+  "softwareVersion": "1.0.0",
+  "description": "A Chrome extension that adds a maximize button to YouTube's \"Ask about this video\" AI panel, expanding it from YouTube's fixed 456px column to the full width of the browser window and increasing its body text from 14px to 18px.",
+  "license": "https://opensource.org/licenses/MIT",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "permissions": "none",
+  "codeRepository": "https://github.com/meherhendi/youtube-ask-maximizer",
+  "author": { "@type": "Person", "name": "Meher Hendi", "url": "https://github.com/meherhendi" },
+  "featureList": [
+    "Expands the YouTube Ask about this video panel to the full browser window width",
+    "Increases panel body text from 14px to 18px while maximized",
+    "One-click toggle button next to the panel's Close button",
+    "Escape key restores the original width",
+    "Requests zero browser permissions"
   ]
 }
 </script>
-
-<style>
-  :root {
-    --bg: #ffffff;
-    --surface: #f6f7f8;
-    --border: #e2e4e7;
-    --text: #17181a;
-    --muted: #5c6066;
-    --accent: #ff0000;
-    --accent-ink: #ffffff;
-    --code-bg: #f0f1f3;
-    --radius: 12px;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #0f0f0f;
-      --surface: #1a1a1a;
-      --border: #2e2f31;
-      --text: #f1f1f1;
-      --muted: #a0a4aa;
-      --code-bg: #212123;
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #0f0f0f;
-    --surface: #1a1a1a;
-    --border: #2e2f31;
-    --text: #f1f1f1;
-    --muted: #a0a4aa;
-    --code-bg: #212123;
-  }
-
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
-  a { color: inherit; }
-  header { padding: 64px 0 44px; }
-  .logo { width: 72px; height: 72px; border-radius: 16px; display: block; margin-bottom: 24px; }
-  h1 { font-size: clamp(30px, 6vw, 42px); line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 16px; }
-  .lede { font-size: clamp(18px, 2.6vw, 21px); color: var(--muted); margin: 0 0 32px; }
-  .cta { display: flex; flex-wrap: wrap; gap: 12px; }
-  .btn {
-    display: inline-block; padding: 12px 22px; border-radius: 999px;
-    font-weight: 600; font-size: 16px; text-decoration: none; border: 1px solid var(--border);
-  }
-  .btn--primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-  .btn--ghost { background: var(--surface); }
-  .badges { margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; }
-  .badges li {
-    font-size: 13px; color: var(--muted); background: var(--surface);
-    border: 1px solid var(--border); border-radius: 999px; padding: 4px 12px;
-  }
-  section { padding: 40px 0; border-top: 1px solid var(--border); }
-  h2 { font-size: clamp(22px, 4vw, 27px); letter-spacing: -0.01em; margin: 0 0 8px; }
-  h3 { font-size: 18px; margin: 32px 0 6px; }
-  p { margin: 0 0 16px; }
-  ol, ul { padding-left: 22px; margin: 0 0 16px; }
-  li { margin-bottom: 8px; }
-  code, kbd {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    font-size: 0.88em; background: var(--code-bg);
-    border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px;
-  }
-  pre {
-    background: var(--code-bg); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 16px; overflow-x: auto; margin: 0 0 16px;
-  }
-  pre code { background: none; border: none; padding: 0; font-size: 14px; }
-  table { width: 100%; border-collapse: collapse; margin: 0 0 16px; font-size: 15px; }
-  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
-  th { color: var(--muted); font-weight: 600; }
-  .demo {
-    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 20px; margin: 0 0 16px; display: grid; gap: 14px; grid-template-columns: 1fr 1fr;
-  }
-  .demo figure { margin: 0; }
-  .demo .bar { border: 1px solid var(--border); border-radius: 8px; background: var(--bg); height: 84px; position: relative; overflow: hidden; }
-  .demo .fill { position: absolute; inset: 0 0 0 auto; background: var(--accent); opacity: 0.22; }
-  .demo .fill--narrow { width: 27%; }
-  .demo .fill--wide { width: 100%; }
-  .demo figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
-  .faq details {
-    border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 14px 18px; margin-bottom: 10px; background: var(--surface);
-  }
-  .faq summary { cursor: pointer; font-weight: 600; }
-  .faq details p { margin: 12px 0 0; color: var(--muted); }
-  footer { padding: 40px 0 64px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }
-  @media (max-width: 560px) { .demo { grid-template-columns: 1fr; } }
-</style>
 </head>
 <body>
 
-<div class="wrap">
+<div class="shell">
 
-<header>
-  <img class="logo" src="icon128.png" width="72" height="72" alt="Extension icon: a horizontal double-headed arrow inside a rounded red square">
-  <h1>Maximize &ldquo;Ask about this video&rdquo;</h1>
-  <p class="lede">A free, open-source Chrome extension that expands YouTube&rsquo;s <strong>Ask about this video</strong> AI panel to the full width of your browser window &mdash; and makes its text large enough to actually read.</p>
-  <div class="cta">
-    <a class="btn btn--primary" href="https://github.com/meherhendi/youtube-ask-maximizer">Get it on GitHub</a>
-    <a class="btn btn--ghost" href="#install">Installation guide</a>
+  <header class="masthead">
+    <a class="wordmark" href="./">Maximize <em>Ask about this video</em></a>
+    <nav>
+      <a href="technical.html">Technical details</a>
+      <a href="https://github.com/meherhendi/youtube-ask-maximizer">GitHub</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>YouTube's AI panel is <em>too narrow.</em></h1>
+    <p class="deck">This extension adds a button that makes it fill the whole window &mdash; and makes the text bigger. Click it again to put it back.</p>
   </div>
-  <ul class="badges">
-    <li>Manifest V3</li>
-    <li>Zero permissions</li>
-    <li>No tracking</li>
-    <li>MIT licensed</li>
-    <li>~11&nbsp;KB</li>
-  </ul>
-</header>
 
-<section id="problem">
-  <h2>The problem it solves</h2>
-  <p>YouTube&rsquo;s &ldquo;Ask about this video&rdquo; panel is an AI chat assistant that answers questions about the video you&rsquo;re watching. YouTube pins it to a narrow column on the right &mdash; roughly <strong>456&nbsp;pixels wide</strong> with <strong>14px</strong> body text &mdash; and offers no built-in way to widen it or enlarge the type. On a large monitor, long AI answers become a thin ribbon of small text scrolling past a mostly empty screen.</p>
-  <p>This extension adds a maximize button to that panel&rsquo;s header. One click and the panel spans the entire browser window, with body text scaled up to 18px.</p>
-
-  <div class="demo">
-    <figure>
-      <div class="bar"><span class="fill fill--narrow"></span></div>
-      <figcaption>Default: ~456px wide, 14px text</figcaption>
-    </figure>
-    <figure>
-      <div class="bar"><span class="fill fill--wide"></span></div>
-      <figcaption>Maximized: full window width, 18px text</figcaption>
-    </figure>
+  <div class="row">
+    <div class="label">Before / after</div>
+    <div>
+      <div class="compare">
+        <figure>
+          <div class="frame"><span class="stage"></span><span class="strip"></span></div>
+          <figcaption>YouTube's default: a <b>456px</b> strip, <b>14px</b> text.</figcaption>
+        </figure>
+        <figure>
+          <div class="frame frame--wide"><span class="stage"></span><span class="strip"></span></div>
+          <figcaption>Maximized: the <b>full window</b>, <b>18px</b> text.</figcaption>
+        </figure>
+      </div>
+    </div>
   </div>
-</section>
 
-<section id="features">
-  <h2>What it does</h2>
-  <table>
-    <tr><th>Maximize toggle</th><td>A button appears in the Ask panel header, immediately left of YouTube&rsquo;s Close button. Click to expand, click again to restore.</td></tr>
-    <tr><th>Readable text</th><td>Body copy scales from 14px to 18px with a 1.65 line height while maximized; icons are held at their original size.</td></tr>
-    <tr><th>Keyboard escape</th><td>Press <kbd>Esc</kbd> at any time to restore the normal panel width.</td></tr>
-    <tr><th>Survives navigation</th><td>Moving to another video automatically restores the default layout, and the button re-injects itself on YouTube&rsquo;s single-page navigations.</td></tr>
-    <tr><th>Theme aware</th><td>The button matches YouTube&rsquo;s light and dark themes, tracking the same colours as the native Close button.</td></tr>
-  </table>
-</section>
+  <div class="row">
+    <div class="label">Install</div>
+    <div>
+      <ol class="steps">
+        <li><a href="https://github.com/meherhendi/youtube-ask-maximizer/archive/refs/heads/main.zip">Download the ZIP</a> and unzip it.</li>
+        <li>Open <code>chrome://extensions</code> in your browser.</li>
+        <li>Turn on <strong>Developer mode</strong>, top right.</li>
+        <li>Click <strong>Load unpacked</strong> and pick the unzipped folder.</li>
+        <li>Reload your YouTube tab.</li>
+      </ol>
+      <p style="margin-top:20px"><a class="cta" href="https://github.com/meherhendi/youtube-ask-maximizer/archive/refs/heads/main.zip">Download &mdash; free</a></p>
+    </div>
+  </div>
 
-<section id="install">
-  <h2>How to install</h2>
-  <p>The extension is distributed as an unpacked Chromium extension. Installation takes about a minute:</p>
-  <ol>
-    <li>Download the repository from <a href="https://github.com/meherhendi/youtube-ask-maximizer">github.com/meherhendi/youtube-ask-maximizer</a> (use <strong>Code &rarr; Download ZIP</strong>, then unzip it) or clone it:
-      <pre><code>git clone https://github.com/meherhendi/youtube-ask-maximizer.git</code></pre>
-    </li>
-    <li>Open <code>chrome://extensions</code> in your browser. In Brave use <code>brave://extensions</code>, in Edge <code>edge://extensions</code>.</li>
-    <li>Turn on <strong>Developer mode</strong> using the toggle in the top-right corner.</li>
-    <li>Click <strong>Load unpacked</strong> and select the folder you downloaded.</li>
-    <li>Reload any YouTube tab that&rsquo;s already open.</li>
-  </ol>
+  <div class="row">
+    <div class="label">Use it</div>
+    <div>
+      <p>Open a video, click <strong>Ask</strong> under the player, then click the <strong>&#10530;</strong> button next to the panel's close button.</p>
+      <p>Click it again or press <kbd>Esc</kbd> to go back to normal.</p>
+    </div>
+  </div>
 
-  <h3>Using it</h3>
-  <p>Open any YouTube video and click <strong>Ask</strong> below the player to open the &ldquo;Ask about this video&rdquo; panel. A maximize icon now sits next to the panel&rsquo;s Close button. Click it to fill the window; click it again, or press <kbd>Esc</kbd>, to go back.</p>
-</section>
+  <div class="row">
+    <div class="label">Good to know</div>
+    <div>
+      <ul class="plain">
+        <li>Free, and the code is public.</li>
+        <li>Asks for no permissions and collects nothing about you.</li>
+        <li>Works in Chrome, Brave, Edge and other Chromium browsers.</li>
+        <li>Not on the Chrome Web Store yet, so it installs manually as above.</li>
+      </ul>
+      <p class="fine"><a href="technical.html">Technical details &rarr;</a></p>
+    </div>
+  </div>
 
-<section id="privacy">
-  <h2>Privacy and permissions</h2>
-  <p>Maximize &ldquo;Ask about this video&rdquo; requests <strong>no permissions at all</strong>. Its Manifest V3 manifest declares no <code>permissions</code> array and no <code>host_permissions</code> array. The entire extension is one content script and one stylesheet, scoped to <code>www.youtube.com</code> and <code>m.youtube.com</code>.</p>
-  <ul>
-    <li>It makes <strong>no network requests</strong> of any kind.</li>
-    <li>It stores <strong>no data</strong>, locally or remotely &mdash; there is no <code>storage</code> permission.</li>
-    <li>It contains <strong>no analytics, telemetry, or tracking</strong> code.</li>
-    <li>It cannot read your browsing history, cookies, or any site other than YouTube.</li>
-    <li>It loads <strong>no remote code</strong>; everything ships in the package.</li>
-  </ul>
-  <p>The full source is about 200 lines of JavaScript and CSS, small enough to read end to end in a few minutes before you install it.</p>
-</section>
-
-<section id="compat">
-  <h2>Browser compatibility</h2>
-  <p>This is a standard Manifest V3 extension that uses no Chrome-specific APIs, so it runs on any Chromium-based browser.</p>
-  <table>
-    <tr><th>Browser</th><th>Status</th></tr>
-    <tr><td>Google Chrome</td><td>Tested and working</td></tr>
-    <tr><td>Brave</td><td>Tested and working</td></tr>
-    <tr><td>Microsoft Edge</td><td>Expected to work (Chromium, MV3)</td></tr>
-    <tr><td>Opera, Vivaldi, Arc</td><td>Expected to work (Chromium, MV3)</td></tr>
-    <tr><td>Firefox</td><td>Not supported &mdash; the panel is a YouTube desktop feature targeted through Chromium&rsquo;s content-script model</td></tr>
-  </table>
-</section>
-
-<section id="faq" class="faq">
-  <h2>Frequently asked questions</h2>
-
-  <details open>
-    <summary>How do I make YouTube&rsquo;s &ldquo;Ask about this video&rdquo; panel wider?</summary>
-    <p>YouTube fixes the panel at roughly 456px and provides no setting to widen it. Installing Maximize &ldquo;Ask about this video&rdquo; adds a maximize button to the panel header; one click expands the panel to the full width of the browser window.</p>
-  </details>
-
-  <details>
-    <summary>Can I make the text in YouTube&rsquo;s AI panel bigger?</summary>
-    <p>Yes. This extension raises the panel&rsquo;s body text from YouTube&rsquo;s default 14px to 18px whenever the panel is maximized, and returns it to 14px when you collapse it.</p>
-  </details>
-
-  <details>
-    <summary>Is it safe? What permissions does it need?</summary>
-    <p>It requests no permissions whatsoever &mdash; no <code>permissions</code> and no <code>host_permissions</code> in the manifest. It makes no network requests, stores no data, and contains no tracking code. The source is public and roughly 200 lines.</p>
-  </details>
-
-  <details>
-    <summary>Does it work in Brave, Edge, or Opera?</summary>
-    <p>Yes. It is a standard Manifest V3 extension with no Chrome-only APIs, so it works in Brave, Microsoft Edge, Opera, Vivaldi and other Chromium-based browsers. Chrome and Brave have both been tested directly.</p>
-  </details>
-
-  <details>
-    <summary>Is it on the Chrome Web Store?</summary>
-    <p>Not yet. For now, install it as an unpacked extension by following the installation steps above. The source is on GitHub under the MIT License.</p>
-  </details>
-
-  <details>
-    <summary>Does it slow YouTube down?</summary>
-    <p>No measurable impact. The extension is about 11&nbsp;KB total. It watches for the Ask panel using a throttled MutationObserver and otherwise does nothing until you click the button.</p>
-  </details>
-
-  <details>
-    <summary>Will it break when YouTube changes its layout?</summary>
-    <p>It may. The extension targets YouTube&rsquo;s engagement-panel DOM, which YouTube revises periodically. It includes fallback placement logic for unfamiliar header structures. If the button disappears after a YouTube update, please open an issue on GitHub.</p>
-  </details>
-</section>
-
-<section id="source">
-  <h2>Source and licence</h2>
-  <p>Maximize &ldquo;Ask about this video&rdquo; is released under the <a href="https://github.com/meherhendi/youtube-ask-maximizer/blob/main/LICENSE">MIT License</a> by <a href="https://github.com/meherhendi">Meher Hendi</a>. Issues and pull requests are welcome at <a href="https://github.com/meherhendi/youtube-ask-maximizer">github.com/meherhendi/youtube-ask-maximizer</a>.</p>
-  <pre><code>manifest.json   MV3 manifest, content script scoped to youtube.com
-content.js      finds the Ask panel, injects the toggle, manages state
-styles.css      the maximized full-width layout and text scaling</code></pre>
-</section>
-
-<footer>
-  <p>Maximize &ldquo;Ask about this video&rdquo; is an independent open-source project. It is not affiliated with, endorsed by, or sponsored by YouTube or Google LLC. YouTube is a trademark of Google LLC.</p>
-</footer>
+  <footer>
+    <p class="fine">MIT licensed. Built by <a href="https://github.com/meherhendi">Meher Hendi</a>. Independent project &mdash; not affiliated with or endorsed by YouTube or Google LLC.</p>
+  </footer>
 
 </div>
 </body>

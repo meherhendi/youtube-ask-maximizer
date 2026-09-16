@@ -37,8 +37,11 @@ Version: 1.0.0
 
 ## Pages
 
-- [Homepage and FAQ](https://meherhendi.github.io/youtube-ask-maximizer/): features,
-  installation, privacy and permissions, browser compatibility, troubleshooting.
+- [Homepage](https://meherhendi.github.io/youtube-ask-maximizer/): what the extension
+  does, and step-by-step installation instructions for non-technical users.
+- [Technical details](https://meherhendi.github.io/youtube-ask-maximizer/technical.html):
+  manifest facts, DOM targeting and shadow-root traversal, theming, file layout,
+  privacy, browser compatibility, known limitations, FAQ.
 - [Repository README](https://github.com/meherhendi/youtube-ask-maximizer/blob/main/README.md)
 
 ## Disclaimer
