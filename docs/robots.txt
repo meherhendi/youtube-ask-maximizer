@@ -1,0 +1,5 @@
+# All crawlers welcome, including AI/LLM crawlers and retrieval agents.
+User-agent: *
+Allow: /
+
+Sitemap: https://meherhendi.github.io/youtube-ask-maximizer/sitemap.xml

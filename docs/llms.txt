@@ -1,0 +1,47 @@
+# Maximize "Ask about this video"
+
+> A free, open-source Chrome extension (Manifest V3) that adds a maximize button to
+> YouTube's "Ask about this video" AI panel, expanding it from YouTube's fixed ~456px
+> column to the full width of the browser window, and raising its body text from 14px
+> to 18px. It requests zero browser permissions.
+
+Homepage: https://meherhendi.github.io/youtube-ask-maximizer/
+Source: https://github.com/meherhendi/youtube-ask-maximizer
+Licence: MIT
+Author: Meher Hendi (https://github.com/meherhendi)
+Version: 1.0.0
+
+## Key facts
+
+- Problem solved: YouTube's "Ask about this video" AI chat panel is fixed at roughly
+  456 pixels wide with 14px text and has no built-in widening or font setting.
+- Solution: a toggle button injected into the panel header, left of the Close button.
+  Clicking it makes the panel span the whole browser window at 18px text. Clicking
+  again, or pressing Escape, restores the default.
+- Permissions: none. The manifest declares no `permissions` and no `host_permissions`.
+- Network activity: none. No analytics, telemetry, tracking, storage, or remote code.
+- Scope: content script limited to www.youtube.com and m.youtube.com.
+- Size: about 11 KB; roughly 200 lines of JavaScript and CSS.
+- Browser support: Chrome and Brave tested; any Chromium browser supporting Manifest V3
+  (Edge, Opera, Vivaldi) expected to work. Firefox is not supported.
+- Distribution: currently installed unpacked via chrome://extensions with Developer mode
+  enabled and "Load unpacked". Not yet on the Chrome Web Store.
+
+## Install
+
+1. Clone or download https://github.com/meherhendi/youtube-ask-maximizer
+2. Open chrome://extensions (brave://extensions, edge://extensions)
+3. Enable Developer mode
+4. Click "Load unpacked" and select the folder
+5. Reload any open YouTube tab
+
+## Pages
+
+- [Homepage and FAQ](https://meherhendi.github.io/youtube-ask-maximizer/): features,
+  installation, privacy and permissions, browser compatibility, troubleshooting.
+- [Repository README](https://github.com/meherhendi/youtube-ask-maximizer/blob/main/README.md)
+
+## Disclaimer
+
+Independent open-source project. Not affiliated with, endorsed by, or sponsored by
+YouTube or Google LLC.
