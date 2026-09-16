@@ -145,21 +145,26 @@ h1 em { font-style: italic; color: var(--accent); }
 ol.steps { list-style: none; margin: 0; padding: 0; counter-reset: s; }
 ol.steps li {
   counter-increment: s;
-  display: grid;
-  grid-template-columns: 2.1rem 1fr;
-  gap: 14px;
-  padding: 11px 0;
+  position: relative;
+  padding: 11px 0 11px 2.5rem;
   border-top: 1px solid var(--rule);
   max-width: 40rem;
 }
 ol.steps li:first-child { border-top: 0; padding-top: 0; }
+/* The numeral is positioned, not a grid cell: the list items hold mixed inline
+   content, which a grid container would explode into one item per child. */
 ol.steps li::before {
   content: counter(s);
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 2.5rem;
   font-family: "Instrument Serif", Georgia, serif;
-  font-size: 26px;
-  line-height: 1;
+  font-size: 24px;
+  line-height: 1.6rem;
   color: var(--accent);
 }
+ol.steps li:first-child::before { top: 0; }
 
 /* ---- text ---- */
 h2 {
