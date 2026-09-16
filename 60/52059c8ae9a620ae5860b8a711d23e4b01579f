@@ -1,0 +1,23 @@
+docs/technical.html
+  s_8ac33c98a97b8d::t_cc4cad1eb8089c 72,89,119,130,144,156,169
+docs/index.html
+  s_8ac33c98a97b8d::t_cc4cad1eb8089c 74,90,104,112
+docs/style.css
+  s_8ac33c98a97b8d::t_cc4cad1eb8089c 178-190
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "6052059c8ae9a620ae5860b8a711d23e4b01579f",
+  "prompts": {},
+  "sessions": {
+    "s_8ac33c98a97b8d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "241f9d8a-6d97-45c0-80bf-c9b3d9030f14",
+        "model": "claude-opus-5"
+      },
+      "human_author": "meher <20615903+meherhendi@users.noreply.github.com>"
+    }
+  }
+}
