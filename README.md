@@ -21,3 +21,7 @@ restore the normal width. Navigating to another video restores it automatically.
 - `manifest.json` — MV3 manifest, content script scoped to youtube.com
 - `content.js` — finds the Ask panel, injects the toggle button, manages state
 - `styles.css` — the maximized (full-viewport-width) layout
+
+## License
+
+[MIT](LICENSE)
