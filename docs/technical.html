@@ -69,7 +69,7 @@
   </div>
 
   <div class="row">
-    <div class="label">At a glance</div>
+    <h2 class="label">At a glance</h2>
     <div>
       <dl class="facts">
         <div><dt>Version</dt><dd>1.0.0</dd></div>
@@ -86,7 +86,7 @@
   </div>
 
   <div class="row">
-    <div class="label">How it works</div>
+    <h2 class="label">How it works</h2>
     <div>
       <h3>Finding the panel</h3>
       <p>YouTube renders its side panels as <code>ytd-engagement-panel-section-list-renderer</code> elements. The Ask panel is identified by <code>target-id="PAyouchat"</code>. YouTube mixes light DOM with open shadow roots, so the lookup recurses through both.</p>
@@ -116,7 +116,7 @@ line-height: 1.65;    /* headings scale to 1.25x */</code></pre>
   </div>
 
   <div class="row">
-    <div class="label">Files</div>
+    <h2 class="label">Files</h2>
     <div>
       <pre><code>manifest.json   MV3 manifest, content script scoped to youtube.com
 content.js      panel lookup, button injection, toggle state  (~4 KB)
@@ -127,7 +127,7 @@ icons/          16, 32, 48, 128 px</code></pre>
   </div>
 
   <div class="row">
-    <div class="label">Privacy</div>
+    <h2 class="label">Privacy</h2>
     <div>
       <p>The extension requests no permissions, so there is no capability to misuse.</p>
       <ul class="plain">
@@ -141,7 +141,7 @@ icons/          16, 32, 48, 128 px</code></pre>
   </div>
 
   <div class="row">
-    <div class="label">Compatibility</div>
+    <h2 class="label">Compatibility</h2>
     <div>
       <dl class="facts">
         <div><dt>Chrome</dt><dd>Tested</dd></div>
@@ -153,7 +153,7 @@ icons/          16, 32, 48, 128 px</code></pre>
   </div>
 
   <div class="row">
-    <div class="label">Limitations</div>
+    <h2 class="label">Limitations</h2>
     <div>
       <ul class="plain">
         <li>Targets YouTube's internal DOM, which YouTube changes without notice. A layout revision can break the button until the selectors are updated.</li>
@@ -166,7 +166,7 @@ icons/          16, 32, 48, 128 px</code></pre>
   </div>
 
   <div class="row">
-    <div class="label">Build</div>
+    <h2 class="label">Build</h2>
     <div>
       <p>There is no build step. To produce a Web Store package:</p>
       <pre><code>zip -r youtube-ask-maximizer.zip \
