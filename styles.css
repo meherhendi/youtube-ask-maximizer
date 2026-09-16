@@ -1,0 +1,134 @@
+/* Button injected into the panel header */
+.ytmax-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  margin: 0 4px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #0f0f0f;
+  cursor: pointer;
+  flex: none;
+  z-index: 3;
+}
+
+.ytmax-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* YouTube's newer color-version theming no longer exposes --yt-spec-text-primary,
+   so key the icon colour off the dark attribute the same way the Close button does. */
+html[dark] .ytmax-btn,
+ytd-app[dark] .ytmax-btn,
+[darker-dark-theme] .ytmax-btn {
+  color: #f1f1f1;
+}
+
+html[dark] .ytmax-btn:hover,
+ytd-app[dark] .ytmax-btn:hover,
+[darker-dark-theme] .ytmax-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ytmax-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+/* Fallback placement when the panel header has an unfamiliar structure */
+.ytmax-btn--floating {
+  position: absolute;
+  top: 6px;
+  right: 48px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+html[dark] .ytmax-btn--floating,
+ytd-app[dark] .ytmax-btn--floating {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+ytd-engagement-panel-section-list-renderer {
+  position: relative;
+}
+
+/* Maximized panel: overlay the full width of the browser window */
+ytd-engagement-panel-section-list-renderer.ytmax-panel--max {
+  position: fixed !important;
+  top: var(--ytmax-top, 56px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  min-width: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  z-index: 2100 !important;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}
+
+/* Let the panel's inner sections use the new width/height */
+.ytmax-panel--max #content.ytd-engagement-panel-section-list-renderer,
+.ytmax-panel--max #content {
+  max-height: none !important;
+  height: 100% !important;
+  max-width: none !important;
+}
+
+.ytmax-panel--max ytd-structured-description-content-renderer,
+.ytmax-panel--max ytd-expandable-video-description-body-renderer,
+.ytmax-panel--max ytd-video-description-conversation-section-renderer,
+.ytmax-panel--max #conversation-scroll-container,
+.ytmax-panel--max #conversation-list,
+.ytmax-panel--max #input-container,
+.ytmax-panel--max #input-panel {
+  max-width: none !important;
+  width: auto !important;
+}
+
+/* Larger, easier-to-read text while maximized */
+.ytmax-panel--max {
+  --ytmax-font: 18px;
+}
+
+.ytmax-panel--max #content p,
+.ytmax-panel--max #content li,
+.ytmax-panel--max #content span,
+.ytmax-panel--max #content div,
+.ytmax-panel--max #content yt-formatted-string,
+.ytmax-panel--max #content yt-attributed-string,
+.ytmax-panel--max #content .yt-core-attributed-string,
+.ytmax-panel--max #content input,
+.ytmax-panel--max #content textarea {
+  font-size: var(--ytmax-font) !important;
+  line-height: 1.65 !important;
+}
+
+.ytmax-panel--max #content h1,
+.ytmax-panel--max #content h2,
+.ytmax-panel--max #content h3 {
+  font-size: calc(var(--ytmax-font) * 1.25) !important;
+  line-height: 1.4 !important;
+}
+
+/* Keep icons from growing along with the text */
+.ytmax-panel--max #content yt-icon,
+.ytmax-panel--max #content svg {
+  font-size: initial !important;
+}
+
+/* Keep the panel above the video player while maximized */
+html.ytmax-active ytd-watch-flexy[fullscreen] .ytmax-panel--max {
+  top: 0 !important;
+}

@@ -1,0 +1,11 @@
+# Local/editor noise
+.DS_Store
+*.swp
+*.log
+node_modules/
+
+# Never commit browser profiles or packed builds
+*.pem
+*.crx
+*.zip
+profile*/
