@@ -1,0 +1,21 @@
+LICENSE
+  s_8ac33c98a97b8d::t_1b16d0ee47ad1e 1-21
+README.md
+  s_8ac33c98a97b8d::t_df163dee4de83f 24-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "b5c8995c4f513cb06555042bc318d1e1334f542a",
+  "prompts": {},
+  "sessions": {
+    "s_8ac33c98a97b8d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "241f9d8a-6d97-45c0-80bf-c9b3d9030f14",
+        "model": "unknown"
+      },
+      "human_author": "meher <20615903+meherhendi@users.noreply.github.com>"
+    }
+  }
+}
